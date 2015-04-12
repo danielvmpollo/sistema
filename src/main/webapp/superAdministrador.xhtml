@@ -10,7 +10,7 @@ Pagina principal del sistema Jordan.
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     
-    <ui:composition template="/Plantillas/plantilla.xhtml">
+    <ui:composition template="/Plantillas/admin.xhtml">
         <ui:define name="content">
             <div align="center">  
                 <h:form>
@@ -30,7 +30,10 @@ Pagina principal del sistema Jordan.
                                      onclick="PF('retirarPrivilegios').show();"/>
                 </h:form>
             </div>    
-            <p:dialog header="Otorgar Privilegios" widgetVar="agregarPrivilegios" modal="true" height="100">
+            <p:dialog 
+                header="Otorgar Privilegios" 
+                widgetVar="agregarPrivilegios" 
+                modal="true" height="100%">
                 <h:form id="otorga" >
                     <p:dataTable var="_user" value="#{controladorUsuario.usuarios}">
                         <p:column headerText="Usuario">
@@ -50,7 +53,10 @@ Pagina principal del sistema Jordan.
                     </p:dataTable>
                 </h:form>
             </p:dialog>
-            <p:dialog header="Retirar Privilegios" widgetVar="retirarPrivilegios" modal="true" height="100">
+            <p:dialog 
+                header="Retirar Privilegios" 
+                widgetVar="retirarPrivilegios" 
+                modal="true" height="100%">
                 <h:form id="retira" >
                     <p:dataTable var="_user" value="#{controladorUsuario.usuarios}">
                         <p:column headerText="Usuario">

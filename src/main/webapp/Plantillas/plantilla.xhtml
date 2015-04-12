@@ -6,6 +6,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
+    
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="default.css"/>
@@ -33,7 +34,12 @@
                             <p:button icon="ui-icon-search" title="Buscar" style="margin: 5pt"/>
                         </p:menuitem>
                         <p:menuitem>
-                            <p:commandButton icon="ui-icon-key" value="Iniciar Sesión" title="Iniciar Sesión" onclick="PF('logeo').show();" style="margin: 5pt"/>
+                            <p:commandButton 
+                                icon="ui-icon-key" 
+                                value="Iniciar Sesión" 
+                                title="Iniciar Sesión" 
+                                onclick="PF('logeo').show();" 
+                                style="margin: 5pt"/>
                         </p:menuitem>
                     </p:menubar>
                 </h:form>

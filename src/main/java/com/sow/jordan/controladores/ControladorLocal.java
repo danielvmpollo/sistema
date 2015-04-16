@@ -111,6 +111,10 @@ public class ControladorLocal implements Serializable {
         menu = new Menu();
     }
     
+    public void borrarMenu(Menu menu){
+        this.local.getMenu().remove(menu);
+    }
+    
     /**
      * Método que guarda los trasportes
      */
@@ -119,6 +123,9 @@ public class ControladorLocal implements Serializable {
         transporte = new Transporte();
     }
     
+    public void borrarTransporte(Transporte transporte){
+        this.local.getTransporte().remove(transporte);
+    }
     /**
      * 
      * @param event 

@@ -134,7 +134,9 @@ Pagina principal del sistema Jordan.
                                 #{_menu.precioMax}
                                 </p:column>
                                 <p:column >
-                                    <p:commandButton value="Borrar" />
+                                    <p:commandButton 
+                                        value="Borrar" update=":menus @form"
+                                        actionListener="#{controladorLocal.borrarMenu(_menu)}"/>
                                 </p:column>
                             </p:dataTable>﻿
                             <h:panelGrid columns="3" id="panelMenu">
@@ -155,6 +157,11 @@ Pagina principal del sistema Jordan.
                                 </p:column>
                                 <p:column headerText="Tipo">
                                 #{_transporte.tipo}
+                                </p:column>
+                                <p:column >
+                                    <p:commandButton 
+                                        value="Borrar" update=":menus @form"
+                                        actionListener="#{controladorLocal.borrarTransporte(_transporte)}"/>
                                 </p:column>
                             </p:dataTable>﻿
                             <h:panelGrid columns="3" id="panelTransporte">

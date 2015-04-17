@@ -50,5 +50,7 @@ public interface ServicioLocal {
     List<Servicio> cargarServicios();
     
     List<Lugar> buscarLugar(int id);
+
+    Local buscarLocal(String nombreLocal);
     
 }

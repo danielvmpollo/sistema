@@ -88,6 +88,9 @@ public class ControladorLocal implements Serializable {
         this.locales = servicioLocal.cargarLocales();
     }
     
+    public void verLocal(String nombreLocal){
+        this.local = servicioLocal.buscarLocal(nombreLocal);
+    }
     public void guardarLugar(){
         this.servicioLocal.guardarLugar(lugar);
         this.lugares = servicioLocal.cargarLugares();

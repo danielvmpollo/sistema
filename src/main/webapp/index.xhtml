@@ -31,7 +31,7 @@ Pagina principal del sistema Jordan.
                                 <p:row>
                                     <h:panelGrid columns="5">
                                         <p:column>
-                                            <a href="verLocal.xhtml">#{_loc.nombre}</a>
+                                            <h:commandLink value=":#{_loc.nombre}" action="verLocal.xhtml" actionListener="#{controladorLocal.verLocal(_loc.nombre)}"/>
                                         </p:column>
                                         <p:column/><p:column/><p:column/>
                                         <p:column>

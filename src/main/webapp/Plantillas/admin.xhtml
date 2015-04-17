@@ -20,15 +20,15 @@
             <ui:insert name="top">
                 <h:form id="busqueda">
                     <p:menubar >
-                        <p:menuitem value="HOME" style="margin-right: 20pt; color: black; font-size: 20pt; float: left" url="../jordan"/>
-                        
-                        <p:menuitem >
+                        <p:menuitem value="INICIO" style="margin-right: 20pt; color: black; font-size: 20pt; float: left" url="../jordan"/>
+                        <p:menuitem value="Administrdor: " style="margin-right: 20pt; color: black; font-size: 20pt; position: absolute; right: auto" url="../jordan"/>
+                        <p:menuitem>
                             <p:commandButton 
                                 icon="ui-icon-key" 
                                 value="Iniciar Sesión" 
                                 title="Iniciar Sesión" 
                                 onclick="PF('logeo').show();" 
-                                style="margin: 5pt"/>
+                                style="position: absolute; right: 4px;margin: 5pt"/>
                         </p:menuitem>
                     </p:menubar>
                 </h:form>

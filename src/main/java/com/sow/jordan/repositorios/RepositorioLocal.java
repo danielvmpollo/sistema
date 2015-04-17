@@ -19,5 +19,8 @@ public interface RepositorioLocal extends CrudRepository<Local, Integer>{
     
     @Query("SELECT local FROM Local local")
     List<Local> cargarLocales();
+
+    @Query("SELECT local FROM Local local WHERE local.nombre = ?")
+    Local buscarLocal(String nombreLocal);
     
 }

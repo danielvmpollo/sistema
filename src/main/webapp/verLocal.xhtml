@@ -62,13 +62,13 @@ Pagina principal del sistema Jordan.
                     <p:row>
                         <h:panelGrid columns="2">
                             <h:column>
-                                Local: #{controladorLocal.local.nombre} ()
+                                Local: #{controladorLocal.local.nombre} (#{controladorLocal.local.alias})
                             </h:column>
                             <h:column>
                                 <p:rating value="3" readonly="true" />
                             </h:column>
                             <h:column>
-                                Especialidad: Platillo
+                                Especialidad: #{controladorLocal.local.especialidad}
                             </h:column>
                             <h:column></h:column>
                             <h:column>
@@ -103,7 +103,7 @@ Pagina principal del sistema Jordan.
                             <h:column>
                                 <h:outputText value="Descripcion:" />
                                 <p>
-                                    <h:outputLabel value="Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo."/>
+                                    <h:outputLabel value="#{controladorLocal.local.descripcion}"/>
                                 </p>
                             </h:column>
                         </h:panelGrid>

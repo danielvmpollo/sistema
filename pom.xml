@@ -4,7 +4,7 @@
 
     <groupId>com.sow.jordan</groupId>
     <artifactId>jordan</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-DEV</version>
     <packaging>war</packaging>
 
     <name>jordan</name>
@@ -15,6 +15,40 @@
     </properties>
     
     <dependencies>
+        <!--Para bootstrap-->
+        <dependency>
+            <groupId>net.bootsfaces</groupId>
+            <artifactId>bootsfaces</artifactId>
+            <version>0.6.6</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>all-themes</artifactId>
+            <scope>compile</scope>
+            <version>1.0.8</version>
+        </dependency>
+        <!-- Para la imagen -->
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.7</version>
+        </dependency>            
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+        </dependency>
         <!--JEE Plataforma de progrtamacion java-->
         <dependency>
             <groupId>javax</groupId>
@@ -60,7 +94,8 @@
         <dependency>  
             <groupId>org.primefaces</groupId>  
             <artifactId>primefaces</artifactId>  
-            <version>4.0</version>  
+            <version>5.1</version>
+            <scope>compile</scope>
         </dependency> 
         <!--Spring Framework proporciona un modelo de programación y 
         configuración para aplicaciones basadas en java-->

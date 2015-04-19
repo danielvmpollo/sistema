@@ -116,7 +116,17 @@
                 <h:form id="recuperrarContraseña">
                     <p:dialog header="RECUPERAR CONTRASEÑA" widgetVar="recuperar" modal="true"
                               height="100" closable="true" style="width: 120px;"><br/>
-                        <p:inputText placeholder="Correo" /><br/><br/><br/>
+                        <p:inputText id="correo" placeholder="Correo" required="true"
+                                     value="#{controladorUsuario.usuario.correo}" 
+                                     validatorMessage="Correo invalido"
+                                     requiredMessage="Por favor ingresa tu correo">
+                            <f:validateRegex
+                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            <p:ajax update="msgLastname" event="keyup" />
+                        </p:inputText>
+                        <p:watermark for="correo" value="Correo" />
+                        <p:message for="correo" id="msgLastname"/>
+                        <br/><br/><br/>
                         <div align="center">
                             <p:commandButton value="Recuperar Contraseña"/>
                         </div>

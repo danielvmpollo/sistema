@@ -79,6 +79,7 @@ background: linear-gradient(white, gray); /* Standard syntax */
 
 .centrado.ui-menubar, .centrado.selectOneRadio {
     text-align: center;
+    font-size: 15pt;
 }
 
 .centrado .ui-menu-list {

@@ -5,47 +5,46 @@ Pagina principal del sistema Jordan.
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://java.sun.com/jsf/core" 
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:composition template="/Plantillas/plantilla.xhtml">
+    <ui:composition template="/Plantillas/user.xhtml">
         <ui:define name="content">
             <h:form id="top5">
                  <p:growl id="msgs" showDetail="true"/>
-                 <h3 style="color: black">Top 5</h3>
+                 <h:outputText value="TOP 5" style="font-size: 25pt"/>
                  <p:accordionPanel activeIndex="0,1,2,3,4" multiple="true" value="#{controladorLocal.top5}" var="_loc" >
                     <p:tab title="" disabled="true" >
-                        <h:panelGrid columns="3">
-                            <p:column>
-                                <h:panelGrid columns="1" style="font-size: 30pt">
-                                    #{controladorLocal.i}
-                                </h:panelGrid>
-                            </p:column>
-                            <p:column>
-                                <h:panelGrid>
-                                    <h:graphicImage height="50" name="facebook.jpg" /> 
-                                </h:panelGrid>
-                            </p:column>
-                            <p:column>
-                                <p:row>
-                                    <h:panelGrid columns="5">
-                                        <p:column>
-                                            <h:commandLink value=":#{_loc.nombre}" action="verLocal.xhtml" actionListener="#{controladorLocal.verLocal(_loc.nombre)}"/>
-                                        </p:column>
-                                        <p:column/><p:column/><p:column/>
-                                        <p:column>
-                                            <p:rating value="#{_loc.calificacion}" readonly="true" />
-                                        </p:column>
-                                    </h:panelGrid>
-                                </p:row>
-                                <p:row>
-                                    <h:panelGrid columns="1">
-                                        <p>#{_loc.descripcion}</p>
-                                    </h:panelGrid>
-                                </p:row>
-                            </p:column>
-                        </h:panelGrid>
+                        <b:row style="font-size: 15pt">
+                            <b:column col-xs="1" col-lg="1" col-md="2" col-sm="2" >
+                                <b:row style="font-size: 30pt" >
+                                    <h:outputText value="#{controladorLocal.i} "/>
+                                    <h:graphicImage height="50" library="imag" name="facebook.jpg" /> 
+                                </b:row>
+                            </b:column>
+                            <b:column col-xs="11" col-lg="11" col-md="10" col-sm="10">
+                                <b:row>
+                                    <b:column col-xs="7" col-lg="7" col-md="7" col-sm="7" >
+                                        <h:commandLink value="#{_loc.nombre} (#{_loc.alias})" action="verLocal.xhtml" actionListener="#{controladorLocal.verLocal(_loc.nombre)}"/>
+                                    </b:column>
+                                    <b:column col-xs="5" col-lg="5" col-md="5" col-sm="5">
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <h:outputText value="Puntuación: " />
+                                            <p:rating value="3" readonly="true"/>
+                                        </h:panelGrid>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column col-xs="12" col-lg="12" col-md="12" col-sm="12" >
+                                        <p>
+                                            <h:outputText value="#{_loc.descripcion}"/>
+                                        </p>
+                                    </b:column>
+                                </b:row>
+                            </b:column>
+                        </b:row>
                     </p:tab>
                  </p:accordionPanel>
              </h:form>            

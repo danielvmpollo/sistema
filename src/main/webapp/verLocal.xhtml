@@ -10,7 +10,7 @@ Pagina principal del sistema Jordan.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <ui:composition template="/Plantillas/plantilla.xhtml">
+    <ui:composition template="/Plantillas/user.xhtml">
         <ui:define name="content">
             <script type="text/javascript" 
                 src="http://maps.googleapis.com/maps/api/js"
@@ -112,7 +112,7 @@ Pagina principal del sistema Jordan.
                                 <p:outputLabel value="Servicios"/>
                                 <p:selectManyCheckbox 
                                     value="#{controladorLocal.local.servicios}"
-                                    layout="grid" columns="3">
+                                    layout="grid" columns="2">
                                     <!--Modificacion de lineas-->
                                     <f:selectItems 
                                         value="#{controladorLocal.servicios}"

@@ -64,6 +64,8 @@ public class ControladorLocal  implements Serializable {
      * Método que guarda un local en la base de datos.
      */
     public void guardarLocal() {
+        lugar = servicioLocal.buscarLugar(id);
+        local.setLugar(lugar);
         servicioLocal.guardarLocal(local);
         locales = servicioLocal.cargarLocales();
         local = new Local();

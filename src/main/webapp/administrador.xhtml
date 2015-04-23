@@ -162,6 +162,57 @@ Pagina que contiene las funciones del administrador.
                 </h:form>
             </p:dialog>
             
+            <p:dialog header="Eliminar Establecimiento" height="100%" modal="true" 
+                      widgetVar="eliminarEstablecimiento">
+                <h:form>
+                    <h:panelGrid style="width: 800px">
+                        <p:dataTable var="_local" value="#{controladorLocal.locales}">
+                            <p:column headerText="Local" >
+                                <h:outputText value="#{_local.nombre}" style="width:400px"/>
+                            </p:column>
+                            <p:column headerText="Alias">
+                                <h:outputText value="#{_local.alias}" style="width:150px"/>
+                            </p:column>
+                            <p:column headerText="Lugar">
+                                <h:outputText value="#{_local.lugar.nombre}" style="width:150px"/>
+                            </p:column>
+                            <p:column headerText="Eliminar Local" style="width:100px">
+                                <p:commandButton value="Eliminar" 
+                                                 actionListener="#{controladorLocal.eliminarLocal(_local)}" 
+                                                 update="@form"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGrid>
+                </h:form>
+            </p:dialog>
+            
+            <p:dialog header="Eliminar Usuario" height="100%" modal="true" 
+                widgetVar="eliminarUsuario">
+                <h:form id="elimina">
+                    <p:dataTable var="_usuario" value="#{controladorUsuario.usuarios}">
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{_usuario.nombre}" />
+                        </p:column>
+                        <p:column headerText="Usuario">
+                            <h:outputText value="#{_usuario.usuario}" />
+                        </p:column>
+                        <p:column headerText="Correo">
+                            <h:outputText value="#{_usuario.correo}" />
+                        </p:column>
+                        <p:column headerText="Contraseña">
+                            <h:outputText value="#{_usuario.contrasena}" />
+                        </p:column>
+                        <p:column headerText="Privilegio">
+                            <h:outputText value="#{_usuario.privilegio}" />
+                        </p:column>
+                        <p:column headerText="Eliminar Usuario">
+                            <p:commandButton value="Eliminar" update="@form"
+                                actionListener="#{controladorUsuario.eliminarUsuario(_usuario)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:dialog>
+            
         </ui:define>
     </ui:composition>
 </html>

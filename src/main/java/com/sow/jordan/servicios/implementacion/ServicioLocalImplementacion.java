@@ -3,19 +3,14 @@
  */
 package com.sow.jordan.servicios.implementacion;
 
-import com.sow.jordan.modelos.Local;
-import com.sow.jordan.modelos.Lugar;
-import com.sow.jordan.modelos.Menu;
-import com.sow.jordan.modelos.Servicio;
-import com.sow.jordan.repositorios.RepositorioLocal;
-import com.sow.jordan.repositorios.RepositorioLugar;
-import com.sow.jordan.repositorios.RepositorioServicio;
+import com.sow.jordan.modelos.*;
+import com.sow.jordan.repositorios.*;
 import com.sow.jordan.servicios.ServicioLocal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- *
+ * Clase que implementa los servicios de local.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
  * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
@@ -29,15 +24,15 @@ public class ServicioLocalImplementacion implements ServicioLocal{
     @Autowired
     private RepositorioLugar repositorioLugar;
     
-    /**
-     * Variable que almacena el repositorio servicio.
-     */
     @Autowired
     private RepositorioServicio repositorioServicio;
+    
+    @Autowired
+    private RepositorioTransporte repositorioTransporte;
 
     /**
-     * Método para guardar la información de los locales 
-     * @param local El local a guardar
+     * Método para guardar la información de los locales.
+     * @param local El local a guardar.
      */
     @Override
     public void guardarLocal(Local local) {
@@ -46,34 +41,54 @@ public class ServicioLocalImplementacion implements ServicioLocal{
         }
         repositorioLocal.save(local);
     }
-
-    @Override
-    public void eliminarLocal(Local local) {
-        repositorioLocal.delete(local);
-    }
     
+    /**
+     * Método para guardar la información de los lugares
+     * @param lugar El lugar a guardar
+     */
     @Override
     public void guardarLugar(Lugar lugar) {
         repositorioLugar.save(lugar);
     }
 
+    /**
+     * Método para guardar la información de los servicios
+     * @param servicio El servicio a guardar
+     */
     @Override
     public void guardarSercivio(Servicio servicio) {
         repositorioServicio.save(servicio);
     }
     
+    /**
+     * Método para guardar la información de los transportes.
+     * @param transporte El transporte a guardar.
+     */
     @Override
-    public List<Lugar> cargarLugares() {
-        return repositorioLugar.cargarLugares();
+    public void guardarTransporte(Transporte transporte) {
+        repositorioTransporte.save(transporte);
     }
-    
+
+    /**
+     * Método que carga la información de los locales.
+     * @return Una lista con la información.
+     */
     @Override
     public List<Local> cargarLocales() {
         return repositorioLocal.cargarLocales();
     }
     
     /**
-     * Método que carga la información de los locales
+     * Metodo que carga ls informacion de los lugares
+     * @return 
+     */
+    @Override
+    public List<Lugar> cargarLugares() {
+        return repositorioLugar.cargarLugares();
+    }
+
+    /**
+     * Método que carga la información de los servicios
      * @return Una lista con la información
      */
     @Override
@@ -81,14 +96,42 @@ public class ServicioLocalImplementacion implements ServicioLocal{
         return repositorioServicio.cargarServicios();
     }
 
+    /**
+     * Método que carga la información de los tranportes.
+     * @return Una lista con la información.
+     */
     @Override
-    public List<Lugar> buscarLugar(int id) {
+    public List<Transporte> cargarTransportes(){
+        return repositorioTransporte.cargarTranportes();
+    }
+    
+    /**
+     * Método para eliminar un local.
+     * @param local El local a eliminar.
+     */
+    @Override
+    public void eliminarLocal(Local local) {
+        repositorioLocal.delete(local);
+    }
+    
+    /**
+     * Método que busca un lugar mediante su id.
+     * @param id El id del lugar.
+     * @return Una lista con la información
+     */
+    @Override
+    public Lugar buscarLugar(int id) {
         return repositorioLugar.buscarLugar(id);
     }
 
+    /**
+     * Método que busca un local mediante su nombre.
+     * @param nombre El nombre del local.
+     * @return Un local.
+     */
     @Override
-    public Local buscarLocal(String nombreLocal) {
-        return repositorioLocal.buscarLocal(nombreLocal);
+    public Local buscarLocal(String nombre) {
+        return repositorioLocal.buscarLocal(nombre);
     }
     
 }

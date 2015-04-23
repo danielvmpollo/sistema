@@ -12,42 +12,42 @@ Pagina principal del sistema Jordan.
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:composition template="/Plantillas/user.xhtml">
         <ui:define name="content">
-            <h:form id="top5">
-                 <p:growl id="msgs" showDetail="true"/>
-                 <h:outputText value="TOP 5" style="font-size: 25pt"/>
-                 <p:accordionPanel activeIndex="0,1,2,3,4" multiple="true" value="#{controladorLocal.top5}" var="_loc" >
-                    <p:tab title="" disabled="true" >
-                        <b:row style="font-size: 15pt">
-                            <b:column col-xs="1" col-lg="1" col-md="2" col-sm="2" >
-                                <b:row style="font-size: 30pt" >
-                                    <h:outputText value="#{controladorLocal.i} "/>
-                                    <h:graphicImage height="50" library="imag" name="facebook.jpg" /> 
-                                </b:row>
-                            </b:column>
-                            <b:column col-xs="11" col-lg="11" col-md="10" col-sm="10">
-                                <b:row>
-                                    <b:column col-xs="7" col-lg="7" col-md="7" col-sm="7" >
-                                        <h:commandLink value="#{_loc.nombre} (#{_loc.alias})" action="verLocal.xhtml" actionListener="#{controladorLocal.verLocal(_loc.nombre)}"/>
-                                    </b:column>
-                                    <b:column col-xs="5" col-lg="5" col-md="5" col-sm="5">
-                                        <h:panelGrid columns="2" cellpadding="5">
-                                            <h:outputText value="Puntuación: " />
+            <h:form>
+                <h3>Top 5</h3>
+                <p:accordionPanel activeIndex="0,1,2,3,4" multiple="true" 
+                                  value="#{controladorLocal.top5}" var="_local" >
+                    <p:tab title="" >
+                        <h:panelGrid columns="1" width="100%">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:outputLabel value="#{controladorLocal.posicion}" 
+                                                   style="font-size: 30pt"/>
+                                    <h:graphicImage width="150" height="150"
+                                                    rendered="#{_local.imagen ne null}"
+                                                    value="data:image/png;base64,#{_local.imagenUrl}"/> 
+                                </h:panelGrid>
+                                <h:panelGrid columns="1" width="100%" >
+                                    <h:panelGrid columns="2" width="100%" >
+                                        <a href="local.xhtml" style="font-size: 14pt">
+                                        #{_local.nombre} (#{_local.alias})</a>
+                                        <h:panelGrid columns="2" >
+                                            <p:outputLabel value="Puntuación:" style="font-size: 15pt"/>
                                             <p:rating value="3" readonly="true"/>
                                         </h:panelGrid>
-                                    </b:column>
-                                </b:row>
-                                <b:row>
-                                    <b:column col-xs="12" col-lg="12" col-md="12" col-sm="12" >
-                                        <p>
-                                            <h:outputText value="#{_loc.descripcion}"/>
-                                        </p>
-                                    </b:column>
-                                </b:row>
-                            </b:column>
-                        </b:row>
+                                    </h:panelGrid>
+                                    <p style="font-size: 14pt">#{_local.descripción}</p>
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </h:panelGrid>
                     </p:tab>
-                 </p:accordionPanel>
-             </h:form>            
+                </p:accordionPanel>
+            </h:form>
+            
+            <p:dataTable value="#{controladorUsuario.usuarios}" var="_usuario">
+                <p:column>#{_usuario.usuario}</p:column>
+                <p:column>#{_usuario.contrasena}</p:column>
+                <p:column>#{_usuario.privilegio}</p:column>
+            </p:dataTable>
         </ui:define>
     </ui:composition>
 </html>

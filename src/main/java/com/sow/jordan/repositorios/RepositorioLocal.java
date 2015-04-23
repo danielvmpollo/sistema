@@ -1,5 +1,5 @@
 /*
- * Paquete que contienje los repositorios del sistema Jordan
+ * Paquete que contiene los repositorios del sistema Jordan
  */
 package com.sow.jordan.repositorios;
 
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- *
+ * Interfaz que contiene las consultas a la base de datos.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
  * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
@@ -17,10 +17,19 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface RepositorioLocal extends CrudRepository<Local, Integer>{
     
+    /**
+     * Método que carga la información de los locales.
+     * @return Una lista con la información.
+     */
     @Query("SELECT local FROM Local local")
     List<Local> cargarLocales();
 
+    /**
+     * Método que se encarga de buscar un local por medio de su nombre.
+     * @param nombre El nombre del local. 
+     * @return Un local.
+     */
     @Query("SELECT local FROM Local local WHERE local.nombre = ?")
-    Local buscarLocal(String nombreLocal);
+    Local buscarLocal(String nombre);
     
 }

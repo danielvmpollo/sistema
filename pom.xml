@@ -4,7 +4,7 @@
 
     <groupId>com.sow.jordan</groupId>
     <artifactId>jordan</artifactId>
-    <version>1.0-DEV</version>
+    <version>1.0-REV</version>
     <packaging>war</packaging>
 
     <name>jordan</name>
@@ -15,41 +15,7 @@
     </properties>
     
     <dependencies>
-        <!--Para bootstrap-->
-        <dependency>
-            <groupId>net.bootsfaces</groupId>
-            <artifactId>bootsfaces</artifactId>
-            <version>0.6.6</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>all-themes</artifactId>
-            <scope>compile</scope>
-            <version>1.0.8</version>
-        </dependency>
-        <!-- Para la imagen -->
-        <dependency>
-            <groupId>com.lowagie</groupId>
-            <artifactId>itext</artifactId>
-            <version>2.1.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.7</version>
-        </dependency>            
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <!--JEE Plataforma de progrtamacion java-->
+        <!--JEE Plataforma de programacion java-->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -91,7 +57,7 @@
             <version>1.0</version>
         </dependency>
         <!--primefaces Componente para JSF, cuenta con etiquetas para las vistas-->
-        <dependency>  
+        <dependency> 
             <groupId>org.primefaces</groupId>  
             <artifactId>primefaces</artifactId>  
             <version>5.1</version>
@@ -103,7 +69,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>3.2.8.RELEASE</version>
-        </dependency>   
+        </dependency>     
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
@@ -148,11 +114,71 @@
             <artifactId>h2</artifactId>
             <version>1.4.186</version>
         </dependency>
-        <!---->
+        <!---sistema administrador de base de datos mysql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.34</version>
+        </dependency>
+        <!-- Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>3.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>3.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>3.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>3.2.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-acl</artifactId>
+            <version>3.2.3.RELEASE</version>
+        </dependency>
+        <!---Agregar imagenes-->
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>2.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.7</version>
+        </dependency>            
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <!--Para bootstrap-->
+        <dependency>
+            <groupId>net.bootsfaces</groupId>
+            <artifactId>bootsfaces</artifactId>
+            <version>0.6.6</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>all-themes</artifactId>
+            <scope>compile</scope>
+            <version>1.0.8</version>
         </dependency>
         <!--Fin de las dependencias agregadas -->
     </dependencies>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Pagina principal del sistema Jordan.
+-->    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <ui:composition template="/Plantillas/admin.xhtml">
+        <ui:define name="content">
+            <div align="center">  
+                <h:form>
+                    <p:commandButton value="Otorgar Privilegios de Administrador" 
+                                     id="elimest" 
+                                     type="button"
+                                     ajax="false" 
+                                     styleClass="botones"
+                                     onclick="PF('agregarPrivilegios').show();"/>
+                    <br/>
+                    <br/>
+                    <p:commandButton value="Retirar Privilegios a un Administrador" 
+                                     id="elimusu" 
+                                     type="button"
+                                     ajax="false" 
+                                     styleClass="botones"
+                                     onclick="PF('retirarPrivilegios').show();"/>
+                </h:form>
+            </div>    
+            <p:dialog 
+                header="Otorgar Privilegios" 
+                widgetVar="agregarPrivilegios" 
+                modal="true" height="100%">
+                <h:form id="otorga" >
+                    <p:dataTable var="_user" value="#{controladorUsuario.usuarios}">
+                        <p:column headerText="Usuario">
+                            <h:outputText value="#{_user.usuario}" />
+                        </p:column>
+
+                        <p:column headerText="Privilegio">
+                            <h:outputText value="#{_user.privilegio}" />
+                        </p:column>
+
+                        <p:column headerText="Otorgar Privilegios">
+                            <p:commandButton 
+                                value="Otorgar" 
+                                actionListener="#{_user.setPrivilegio('ADMIN')}" 
+                                update="@form :retira"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:dialog>
+            <p:dialog 
+                header="Retirar Privilegios" 
+                widgetVar="retirarPrivilegios" 
+                modal="true" height="100%">
+                <h:form id="retira" >
+                    <p:dataTable var="_user" value="#{controladorUsuario.usuarios}">
+                        <p:column headerText="Usuario">
+                            <h:outputText value="#{_user.usuario}" />
+                        </p:column>
+
+                        <p:column headerText="Privilegio">
+                            <h:outputText value="#{_user.privilegio}" />
+                        </p:column>
+
+                        <p:column headerText="Retirar Privilegios">
+                            <p:commandButton 
+                                value="Retirar" 
+                                actionListener="#{_user.setPrivilegio('USER')}"
+                                update="@form :otorga"/>
+                            <!--p:commandButton value="Retirar" actionListener="{controladorUsuario.retirar(_user)}"/-->
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+    </html>

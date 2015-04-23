@@ -1,22 +1,13 @@
 /*
- * Paquete que contiene los controladores del sistema Jordan
+ * Paquete que contiene los controladores del sistema.
  */
 package com.sow.jordan.controladores;
 
-import com.sow.jordan.modelos.Local;
-import com.sow.jordan.modelos.Lugar;
-import com.sow.jordan.modelos.Menu;
-import com.sow.jordan.modelos.Servicio;
-import com.sow.jordan.modelos.Transporte;
+import com.sow.jordan.modelos.*;
 import com.sow.jordan.servicios.ServicioLocal;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import javax.annotation.PostConstruct;
-import javax.faces.model.SelectItem;
-import javax.faces.model.SelectItemGroup;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,47 +15,325 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 /**
- * Clase que ...
- *
+ * Clase se encarga de conectar las vistas con los modelos del sistema, conecta
+ * los locales y clases relacionadas con las vistas.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
  * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */
-@Controller("controladorLocal") //Indica que la clase es un controlador
+@Controller("controladorLocal")
 @Scope("session")
-public class ControladorLocal implements Serializable {
+public class ControladorLocal  implements Serializable {
 
     @Autowired
     private ServicioLocal servicioLocal;
+    
     private List<Local> locales;
     private Local local;
     private List<Lugar> lugares;
-    private Map<String,Lugar> lugares2;
     private Lugar lugar;
     private List<Servicio> servicios;
     private Servicio servicio;
     private Menu menu;
+    private List<Transporte> transportes;
     private Transporte transporte;
-    private int idlugar;
-    //
-    private int i = 1;
+    
+    //private Map<String,Lugar> lugares2;
+    private int posicion;
+    private int id;
 
-    @PostConstruct //Indica que se ejecutara despues de la inyeccion de dependencias
+    /**
+     * Método que se ejecuta después de realizar la inyección de dependencias.
+     */
+    @PostConstruct
     public void inicio() {
+        servicios = servicioLocal.cargarServicios();
         lugares = servicioLocal.cargarLugares();
+        transportes = servicioLocal.cargarTransportes();
+        locales = servicioLocal.cargarLocales();
+        local.setMenu(new ArrayList<Menu>());
+        local.setTransportes(new ArrayList<Transporte>());
         /*lugares2 = new HashMap<String,Lugar>();
         for(Lugar l : lugares)
             lugares2.put(l.getNombre(), l);
         */
+    }
+    
+    /**
+     * Método que guarda un local en la base de datos.
+     */
+    public void guardarLocal() {
+        servicioLocal.guardarLocal(local);
         locales = servicioLocal.cargarLocales();
+        local = new Local();
+        local.setMenu(new ArrayList<Menu>());
+        local.setTransportes(new ArrayList<Transporte>());
+    }
+    
+    /**
+     * Método que guarda en la base de datos un lugar.
+     */
+    public void guardarLugar(){
+        servicioLocal.guardarLugar(lugar);
+        lugares = servicioLocal.cargarLugares();
+        lugar = new Lugar();
+    }
+    
+    /**
+     * Método que guarda los menús de un local.
+     */
+    public void guardarMenu() {
+        local.getMenu().add(menu);
+        menu = new Menu();
+    }
+    
+    /**
+     * Métrodo que guarda en la base de datos un servicio.
+     */
+    public void guardarServicio() {
+        servicioLocal.guardarSercivio(servicio);
         servicios = servicioLocal.cargarServicios();
-        this.menu=new Menu();
-        this.local.setMenu(new ArrayList<Menu>());
-        this.transporte = new Transporte();
-        this.local.setTransporte(new ArrayList<Transporte>());
+        servicio = new Servicio();
+    }
+    
+    /**
+     * Método que agrega un transporte a un local.
+     */
+    public void guardarTransporte() {
+        local.getTransportes().add(transporte);
+        transporte = new Transporte();
+    }
+    
+    /**
+     * Método que guarda en la base de datos un transporte.
+     */
+    public void agregarTransporte(){
+        servicioLocal.guardarTransporte(transporte);
+        transportes = servicioLocal.cargarTransportes();
+        transporte = new Transporte();
+    }
+    
+    /**
+     * Método que elimina un local de la base de datos.
+     * @param local El local a eliminar.
+     */
+    public void eliminarLocal(Local local) {
+        servicioLocal.eliminarLocal(local);
+        locales = servicioLocal.cargarLocales();
+    }
+    
+    /**
+     * Método que elimina un menú de un local.
+     * @param menu El menú a aliminar.
+     */
+    public void eliminarMenu(Menu menu) {
+        this.local.getMenu().remove(menu);
+    }
+    
+    /**
+     * Método que elimina un transporte de un local.
+     * @param transporte El transporte a aliminar.
+     */
+    public void eliminarTransporte(Transporte transporte) {
+        this.local.getTransportes().remove(transporte);
+    }
+    
+    /**
+     * Método para guardar la imagen del local.
+     * @param event El evento que se activa al agregar la imagen.
+     */
+    public void imagenLocal(FileUploadEvent event) {
+        UploadedFile file = event.getFile();
+        this.local.setImagen(file.getContents());
+    }
+    
+    /**
+     * Método que guarda la imagen de un servicio.
+     * @param event El evento que se activa al agregar la imagen.
+     */
+    public void imagenServicio(FileUploadEvent event) {
+        UploadedFile file = event.getFile();
+        this.servicio.setImagen(file.getContents());
     }
 
+    /**
+     * Método que regresa la lista de locales.
+     * @return Una lista con la información.
+     */
+    public List<Local> getLocales() {
+        return locales;
+    }
+    
+    /**
+     * Método para agregar un local a la lista.
+     * @param locales Una lista con la información.
+     */
+    public void setLocales(List<Local> locales) {
+        this.locales = locales;
+    }
+
+    /**
+     * Método que regresa un local.
+     * @return Un local.
+     */
+    public Local getLocal() {
+        return local;
+    }
+
+    /**
+     * Método que asigna un local.
+     * @param local Un local.
+     */
+    public void setLocal(Local local) {
+        this.local = local;
+    }
+
+    /**
+     * Método que regresa los lugares.
+     * @return Una lista con la información.
+     */
+    public List<Lugar> getLugares() {
+        return lugares;
+    }
+
+    /**
+     * Método que agrega un lugar.
+     * @param lugares Una lista con la información.
+     */
+    public void setLugares(List<Lugar> lugares) {
+        this.lugares = lugares;
+    }
+
+    /**
+     * Método que regresa un lugar.
+     * @return Un local.
+     */
+    public Lugar getLugar() {
+        return lugar;
+    }
+
+    /**
+     * Método que asigna un lugar.
+     * @param lugar El nuevo lugar.
+     */
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
+    }
+
+    /**
+     * Método que regresa un menú.
+     * @return Un menú.
+     */
+    public Menu getMenu() {
+        return menu;
+    }
+
+    /**
+     * Método para agregar un menú.
+     * @param menu El nuevo menú.
+     */
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    /**
+     * Método que regresa los servicios de los locales.
+     * @return Una lista con la información.
+     */
+    public List<Servicio> getServicios() {
+        return servicios;
+    }
+
+    /**
+     * Método que agrega un servicio.
+     * @param servicios Una lista con la nueva información
+     */
+    public void setServicios(List<Servicio> servicios) {
+        this.servicios = servicios;
+    }
+
+    /**
+     * Método que regresa un servicio.
+     * @return Un servicio.
+     */
+    public Servicio getServicio() {
+        return servicio;
+    }
+
+    /**
+     * Método que asigna un nuevo servicio.
+     * @param servicio El nuevo servicio.
+     */
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
+    }
+
+    /**
+     * Método que regresa los tranportes que hay en CU.
+     * @return Una lista con la información.
+     */
+    public List<Transporte> getTransportes() {
+        return transportes;
+    }
+
+    /**
+     * Método que agrega un nuevo transporte.
+     * @param transportes Una lista con la nueva información
+     */
+    public void setTransportes(List<Transporte> transportes) {
+        this.transportes = transportes;
+    }
+
+    /**
+     * Método que regresa un transporte.
+     * @return Un transporte.
+     */
+    public Transporte getTransporte() {
+        return transporte;
+    }
+
+    /**
+     * Método que asigna un nuevo transporte.
+     * @param transporte El n uevo transporte.
+     */
+    public void setTransporte(Transporte transporte) {
+        this.transporte = transporte;
+    }
+
+    /**
+     * Método que regresa la posición que ocupa un local en la lista de top 5.
+     * @return Un entero con la información.
+     */
+    public int getPosicion() {
+        return posicion++;
+    }
+    
+    /**
+     * Método que regresa un id.
+     * @return Un entero con la informcaión.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Método que guarda un id.
+     * @param id El nuevo id.
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    /**
+     * Método que regresa la lista de lugares con mejor calificación.
+     * @return Una lista de los mejores 5 locales.
+     */
+    public List<Local> getTop5() {
+        posicion = 1;
+        return locales;
+    }
+    /**
     public Map<String, Lugar> getLugares2() {
         return lugares2;
     }
@@ -73,171 +342,13 @@ public class ControladorLocal implements Serializable {
         this.lugares2 = lugares2;
     }
     
-    public void guardarLocal() {
-        lugar = servicioLocal.buscarLugar(idlugar).listIterator().next();
-        local.setLugar(lugar);
-        this.servicioLocal.guardarLocal(local);
-        this.locales = servicioLocal.cargarLocales();
-        this.local = new Local();
-        this.local.setMenu( new ArrayList<Menu>());
-        this.local.setTransporte(new ArrayList<Transporte>());
-    }
-    
-    public void eliminarLocal(Local local){
-        this.servicioLocal.eliminarLocal(local);
-        this.locales = servicioLocal.cargarLocales();
-    }
     
     public void verLocal(String nombreLocal){
         this.local = servicioLocal.buscarLocal(nombreLocal);
-    }
-    public void guardarLugar(){
-        this.servicioLocal.guardarLugar(lugar);
-        this.lugares = servicioLocal.cargarLugares();
-        this.lugar = new Lugar();
-    }
-    
-    /**
-     * Método que guarda los lugares
-     */
-    public void guardarServicio() {
-        this.servicioLocal.guardarSercivio(servicio);
-        this.servicios = servicioLocal.cargarServicios();
-        servicio = new Servicio();
-    }
-    
-    /**
-     * Método que guarda los menus
-     */
-    public void guardarMenu() {
-        this.local.getMenu().add(menu);
-        menu = new Menu();
-    }
-    
-    public void borrarMenu(Menu menu){
-        this.local.getMenu().remove(menu);
-    }
-    
-    /**
-     * Método que guarda los trasportes
-     */
-    public void guardarTransporte() {
-        this.local.getTransporte().add(transporte);
-        transporte = new Transporte();
     }
     
     public void borrarTransporte(Transporte transporte){
         this.local.getTransporte().remove(transporte);
     }
-    /**
-     * 
-     * @param event 
-     */
-    public void imagenServicio(FileUploadEvent event) {
-        UploadedFile file = event.getFile();
-        this.servicio.setImagen(file.getContents());
-    }
-    
-    public void imagenLocal(FileUploadEvent event) {
-        UploadedFile file = event.getFile();
-        this.local.setImagen(file.getContents());
-    }
-
-    public List<Local> getLocales() {
-        return locales;
-    }
-
-    public void setLocales(List<Local> locales) {
-        this.locales = locales;
-    }
-
-    public Local getLocal() {
-        return local;
-    }
-
-    public void setLocal(Local local) {
-        this.local = local;
-    }
-
-    public List<Lugar> getLugares() {
-        return lugares;
-    }
-
-    public void setLugares(List<Lugar> lugares) {
-        this.lugares = lugares;
-    }
-
-    public Lugar getLugar() {
-        return lugar;
-    }
-
-    public void setLugar(Lugar lugar) {
-        this.lugar = lugar;
-    }
-    
-    public List<Servicio> getServicios() {
-        return servicios;
-    }
-
-    public void setServicios(List<Servicio> servicios) {
-        this.servicios = servicios;
-    }
-
-    /**
-     * Método que regresa un servicio
-     * @return Un servicio
-     */
-    public Servicio getServicio() {
-        return servicio;
-    }
-
-    public void setServicio(Servicio servicio) {
-        this.servicio = servicio;
-    }
-
-    /**
-     * Método que regresa un menu
-     * @return Un menu
-     */
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
-    /**
-     * Método que regresa un trasnsporte
-     * @return Un transporte
-     */
-    public Transporte getTransporte() {
-        return transporte;
-    }
-
-    public void setTransporte(Transporte transporte) {
-        this.transporte = transporte;
-    }
-
-    public int getIdlugar() {
-        return idlugar;
-    }
-
-    public void setIdlugar(int idlugar) {
-        this.idlugar = idlugar;
-    }
-    
-    public List<Local> getTop5() {
-        i = 1;
-        return locales;
-    }
-
-    public int getI() {
-        return i++;
-    }
-
-    public void setI(int i) {
-        this.i = i;
-    }
-    
+    */
 }

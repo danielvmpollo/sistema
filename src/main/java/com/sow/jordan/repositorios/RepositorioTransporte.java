@@ -3,7 +3,7 @@
  */
 package com.sow.jordan.repositorios;
 
-import com.sow.jordan.modelos.Lugar;
+import com.sow.jordan.modelos.Transporte;
 import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -15,21 +15,13 @@ import org.springframework.data.repository.CrudRepository;
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */
-public interface RepositorioLugar extends CrudRepository<Lugar, Integer> {
+public interface RepositorioTransporte extends CrudRepository<Transporte, Integer> {
     
     /**
-     * Método que carga la información de los lugares.
+     * Método que carga la información de los transportes.
      * @return Una lista con la información.
      */
-    @Query("SELECT lugar FROM Lugar lugar")
-    List<Lugar> cargarLugares();
-    
-    /**
-     * Método que se encarga de buscar un lugar por medio de su id.
-     * @param id El id del lugar.
-     * @return Un lugar
-     */
-    @Query("SELECT lugar FROM Lugar lugar WHERE lugar.id = ?")
-    Lugar buscarLugar(Integer id);
+    @Query("SELECT transporte FROM Transporte transporte")
+    List<Transporte> cargarTranportes();
     
 }

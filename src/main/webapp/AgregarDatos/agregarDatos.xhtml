@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Pagina para agregar datos.
+-->    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/Plantillas/user.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <p:panelGrid columns="2" >
+                    <p:inputText id="lugar" placeholder="Nombre del lugar" required="true"
+                                 value="#{controladorLocal.lugar.nombre}" />
+                    <p:commandButton ajax="false" 
+                                     actionListener="#{controladorLocal.guardarLugar()}" 
+                                     value="Agregar Lugar" update=":lugares @form"/>
+                </p:panelGrid>
+            </h:form>
+            <h:form>
+                <p:panelGrid columns="2" >
+                    <p:inputText id="lugar" placeholder="Nombre del servicio" required="true"
+                                 value="#{controladorLocal.servicio.nombre}" />
+                    <p:fileUpload allowTypes="/(\.|\/)(gif|jpe?g|png)$/" auto="false" 
+                                  immediate="true" mode="advanced" multiple="false"
+                                  invalidFileMessage="Tipo de archivo invalido" 
+                                  label="elegir" uploadLabel="añadir"
+                                  sizeLimit="2097152" 
+                                  fileUploadListener="#{controladorLocal.imagenServicio}" 
+                                  value="#{controladorLocal.servicio.imagen}"/>
+                    <p:commandButton ajax="false" 
+                                     actionListener="#{controladorLocal.guardarServicio()}" 
+                                     value="Agregar Lugar" update=":servicios @form"/>
+                </p:panelGrid>
+            </h:form>
+            <h:form>
+                <p:dataTable value="#{controladorLocal.lugares}" var="_lugar">
+                    <p:column headerText="Lugar">#{_lugar.nombre}</p:column>
+                </p:dataTable> 
+                <p:dataTable value="#{controladorLocal.servicios}" var="_servicio">
+                    <p:column headerText="Lugar">#{_servicio.nombre}</p:column>
+                    <p:column headerText="Imagen">
+                        <h:graphicImage id="imagen" height="200" 
+                                        rendered="#{_servicio.imagen ne null}"
+                                        value="data:image/png;base64,#{_servicio.imagenUrl}"/> 
+                    </p:column>
+                </p:dataTable> 
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

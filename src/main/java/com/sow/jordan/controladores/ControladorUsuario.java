@@ -13,15 +13,16 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 /**
- * Clase que ...
+ * Clase se encarga de conectar las vistas con los modelos del sistema, conecta
+ * a los usuarios del sistema con las vistas.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
  * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */
-@Controller("controladorUsuario") //Indica que la clase es un controlador
-@Scope("session") 
-public class ControladorUsuario implements Serializable{
+@Controller("controladorUsuario")
+@Scope("session")
+public class ControladorUsuario implements Serializable {
     
     @Autowired
     private ServicioUsuario servicioUsuario;
@@ -30,7 +31,7 @@ public class ControladorUsuario implements Serializable{
     
     private List<Usuario> usuarios;
 
-    @PostConstruct //Indica que se ejecutara despues de la inyeccion de dependencias
+    @PostConstruct
     public void inicia() {
         usuarios = servicioUsuario.cargarUsuarios();
     }

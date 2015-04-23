@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- *
+ * Clase que implementa los servicios de usuario.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
  * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
@@ -27,13 +27,13 @@ public class ServicioUsuarioImplementacion implements ServicioUsuario {
     }
     
     @Override
-    public void eliminarUsuario(Usuario usuario) {
-        repositorioUsuario.delete(usuario);
-    }
-
-    @Override
     public List<Usuario> cargarUsuarios() {
         return repositorioUsuario.cargarUsuarios();
+    }
+    
+    @Override
+    public void eliminarUsuario(Usuario usuario) {
+        repositorioUsuario.delete(usuario);
     }
     
 }

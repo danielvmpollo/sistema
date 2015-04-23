@@ -4,15 +4,12 @@
 package com.sow.jordan.modelos;
 
 import java.io.Serializable;
-import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- *
+ * Clase que almacena la información de los usuarios del sistema.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
  * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
@@ -21,25 +18,30 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "Usuario")
 public class Usuario implements Serializable {
-    
+
     @Id
     private String usuario;
-    
+
     @NotNull
-    @Column(name = "contrasena")
     private String contrasena;
-    
+
     @NotNull
-    @Column(name = "nombre")
     private String nombre;
-    
+
     @NotNull
-    @Column(name = "correo")
     private String correo;
-    
+
     @NotNull
-    @Column(name = "privilegio")
-    private String privilegio = "USER";
+    private String privilegio;
+    
+    @NotNull 
+   private Boolean activo;
+
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "usuario",
+            orphanRemoval = true)
+    private  List<Comentario> comentarios;
 
     public String getUsuario() {
         return usuario;
@@ -80,4 +82,21 @@ public class Usuario implements Serializable {
     public void setPrivilegio(String privilegio) {
         this.privilegio = privilegio;
     }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
+    public  List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios( List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+    
 }

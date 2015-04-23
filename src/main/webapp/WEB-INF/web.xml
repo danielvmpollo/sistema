@@ -66,13 +66,7 @@
         <param-name>javax.faces.CONFIG_FILES</param-name>
         <param-value>/WEB-INF/configuracion.xml</param-value>
     </context-param>
-    <!--Indica el tiempo de la sesión-->
-    <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
-    <!-- Para la imagen-->
+    <!--Subir imagenes-->
     <filter>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
@@ -81,9 +75,46 @@
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <servlet-name>Faces Servlet</servlet-name>
     </filter-mapping>
-    <!-- Para bootstrap -->
+    <!--Formato del texto-->
+    <filter>
+        <filter-name>Filtro</filter-name>
+        <filter-class>com.sow.jordan.filtro.Filtro</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filtro</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+    <!--Seguridad-->
+    <listener>
+        <listener-class>
+            org.springframework.security.web.session.HttpSessionEventPublisher
+        </listener-class>
+    </listener> 
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!--Configuracion para cargar archivos de Spring -->   
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/Spring/configuracionSpring.xml
+            /WEB-INF/Spring/springSecurity.xml
+        </param-value>
+    </context-param>
+    <!--Para bootstrap-->
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>bootstrap</param-value>
     </context-param>
+    <!--Indica el tiempo de la sesión-->
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
 </web-app>

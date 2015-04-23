@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -18,35 +17,29 @@
 
         <div id="top" class="top">
             <ui:insert name="top">
-                
-                <h:form>
-                    <p:menubar styleClass="centrado">
-                        <p:menuitem value="INICIO" url="../jordan" style="margin: 5pt"/>
-                        <p:menuitem>
-                            <p:selectOneMenu id="console" value="elige" style="margin: 5pt">
-                                <f:selectItem itemLabel="Categoría de Búsqueda" itemValue=""/>
-                                <f:selectItem itemLabel="Comida" itemValue="Comida" />
-                                <f:selectItem itemLabel="Local" itemValue="Local" />
-                                <f:selectItem itemLabel="Lugar" itemValue="Lugar" />
-                            </p:selectOneMenu>
-                        </p:menuitem>
-                        <p:menuitem>
-                            <p:inputText placeholder="Buscqueda" style="margin: 5pt;margin-right: 0pt"/>
-                            <p:button icon="ui-icon-search" title="Buscar" style="margin: 5pt; margin-left: 0pt"/>
-                        </p:menuitem>
-                        <p:menuitem>
-                            <p:commandButton 
-                                icon="ui-icon-key" 
-                                value="Iniciar Sesión" 
-                                title="Iniciar Sesión" 
-                                onclick="PF('logeo').show();"
-                                style="margin: 5pt"/>
-                        </p:menuitem>
-                    </p:menubar>
-                </h:form>
-                
-                
-                
+                <p:menubar styleClass="centrado">
+                    <p:menuitem value="INICIO" url="../jordan" style="margin: 5pt"/>
+                    <p:menuitem>
+                        <p:selectOneMenu id="console" value="elige" style="margin: 5pt">
+                            <f:selectItem itemLabel="Categoría de Búsqueda" itemValue=""/>
+                            <f:selectItem itemLabel="Comida" itemValue="Comida" />
+                            <f:selectItem itemLabel="Local" itemValue="Local" />
+                            <f:selectItem itemLabel="Lugar" itemValue="Lugar" />
+                        </p:selectOneMenu>
+                    </p:menuitem>
+                    <p:menuitem>
+                        <p:inputText placeholder="Buscqueda" style="margin: 5pt;margin-right: 0pt"/>
+                        <p:button icon="ui-icon-search" title="Buscar" style="margin: 5pt; margin-left: 0pt"/>
+                    </p:menuitem>
+                    <p:menuitem>
+                        <p:commandButton 
+                            icon="ui-icon-key" 
+                            value="Iniciar Sesión" 
+                            title="Iniciar Sesión" 
+                            onclick="PF('logeo').show();"
+                            style="margin: 5pt"/>
+                    </p:menuitem>
+                </p:menubar>
                 <h:form id="busquedaAbanzada">
                     <p:accordionPanel activeIndex="-1" style="font-size: 15pt">
                         <p:tab id="titulo" title="Busqueda Avanzada" >
@@ -67,8 +60,6 @@
                     </p:accordionPanel>
                 </h:form>
                 
-                
-                
                 <h:form id="iniciarSesion">
                     <p:dialog header="INICIAR SESIÓN" widgetVar="logeo" modal="true" 
                               closable="true"> <br/>
@@ -83,14 +74,6 @@
                         </div>
                     </p:dialog>
                 </h:form>
-                
-                <script>
-                    var error = window.location.search;
-                    if (error == '?error=logeo'){
-                        $(document).ready(function (){PF('logeo').show();})
-                    }
-                </script>
-                
                 <h:form id="agregarUsuarios">
                     <p:dialog header="REGISTRAR" widgetVar="registro"  
                               modal="true" > <br/>
@@ -149,9 +132,7 @@
         </div>
 
         <div id="content" class="center_content">
-            <ui:insert name="content">
-                
-            </ui:insert>
+            <ui:insert name="content">Content</ui:insert>
         </div>
 
     </h:body>

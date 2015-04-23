@@ -142,6 +142,14 @@ public class ControladorLocal  implements Serializable {
     }
     
     /**
+     * Método que busca un local en la base de datos para mostrar su información
+     * @param id El id del local.
+     */
+    public void verLocal(int id) {
+        this.local = servicioLocal.buscarLocal(id);
+    }
+    
+    /**
      * Método para guardar la imagen del local.
      * @param event El evento que se activa al agregar la imagen.
      */
@@ -347,10 +355,6 @@ public class ControladorLocal  implements Serializable {
     
     public void verLocal(String nombreLocal){
         this.local = servicioLocal.buscarLocal(nombreLocal);
-    }
-    
-    public void borrarTransporte(Transporte transporte){
-        this.local.getTransporte().remove(transporte);
     }
     */
 }

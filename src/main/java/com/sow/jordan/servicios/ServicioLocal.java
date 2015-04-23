@@ -80,10 +80,10 @@ public interface ServicioLocal {
     Lugar buscarLugar(int id);
 
     /**
-     * Método que busca un local mediante su nombre.
-     * @param nombre El nombre del local.
+     * Método que busca un local mediante su id.
+     * @param id El id del local.
      * @return Un local.
      */
-    Local buscarLocal(String nombre);
+    Local buscarLocal(int id);
     
 }

@@ -28,8 +28,9 @@ Pagina principal del sistema Jordan.
                                 </h:panelGrid>
                                 <h:panelGrid columns="1" width="100%" >
                                     <h:panelGrid columns="2" width="100%" >
-                                        <a href="local.xhtml" style="font-size: 14pt">
-                                        #{_local.nombre} (#{_local.alias})</a>
+                                        <a href="local.xhtml" style="font-size: 14pt"
+                                           actionListener="#{controladorLocal.verLocal(_local.id)}">
+                                        #{_local.nombre} (#{_local.alias}) </a>
                                         <h:panelGrid columns="2" >
                                             <p:outputLabel value="Puntuación:" style="font-size: 15pt"/>
                                             <p:rating value="3" readonly="true"/>

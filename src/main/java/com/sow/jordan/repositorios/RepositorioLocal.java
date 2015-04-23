@@ -25,11 +25,11 @@ public interface RepositorioLocal extends CrudRepository<Local, Integer>{
     List<Local> cargarLocales();
 
     /**
-     * Método que se encarga de buscar un local por medio de su nombre.
-     * @param nombre El nombre del local. 
+     * Método que se encarga de buscar un local por medio de su id.
+     * @param id El id del local. 
      * @return Un local.
      */
-    @Query("SELECT local FROM Local local WHERE local.nombre = ?")
-    Local buscarLocal(String nombre);
+    @Query("SELECT local FROM Local local WHERE local.id = ?")
+    Local buscarLocal(Integer id);
     
 }

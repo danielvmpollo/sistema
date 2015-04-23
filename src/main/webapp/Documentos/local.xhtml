@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Pagina que muestra la información de un local.
+-->    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/Plantillas/user.xhtml">
+        <ui:define name="content">
+            <script type="text/javascript" 
+                    src="http://maps.googleapis.com/maps/api/js"
+                    />
+            <script type="text/javascript"> 
+                var marker = null;
+                function agregaMarcador(event) {
+                   if(window.marker!==null){
+                       marker.setMap(null);
+                   }
+                    var punto=new google.maps.LatLng(
+                            event.latLng.lat(), 
+                    event.latLng.lng()
+                            );
+                    window.marker = new google.maps.Marker({
+                            position:punto,
+                            title:'Lugar'
+                        });
+
+                    PF('map').addOverlay(marker);
+                }
+                ;
+            </script>
+            <b:container style="font-size: 14pt">
+                <b:row styleClass="show-grid">
+                    <!-- Foto, Transporte, Mapa -->
+                    <b:column col-xs="3" col-lg="3" col-md="3" col-sm="3" >
+                        <b:row>
+                            <p:graphicImage width="150" height="150" name="facebook.jpg" library="imag"/>
+                            <h:graphicImage width="150" height="150"
+                                            rendered="#{controladorLocal.local.imagen ne null}"
+                                            value="data:image/png;base64,#{controladorLocal.local.imagenUrl}"/> 
+                        </b:row>
+                        <b:row>
+                            <p:dataTable value="#{controladorLocal.local.transportes}" var="_transporte"> 
+                                <p:column headerText="Estación" >
+                                    <h:outputText value="#{_transporte.estacion}" />
+                                </p:column>
+                                <p:column headerText="Tipo">
+                                    <h:outputText value="#{_transporte.tipo}" />
+                                </p:column>
+                            </p:dataTable>﻿
+                        </b:row>
+                        <b:row>
+                            <h:form id="form">
+                                <p:outputLabel value="Ubicacion" />
+                                <p:gmap id="gmap" center="#{controladorLocal.local.latitud},#{controladorLocal.local.longitud}" zoom="13" 
+                                        type="HYBRID" 
+                                        style="height: 200pt"
+                                        widgetVar="map"
+                                        disableDoubleClickZoom="true" 
+                                        />
+                            </h:form>
+                        </b:row>
+                    </b:column>
+                    <!-- Datos -->
+                    <b:column col-xs="9" col-lg="9" col-md="9" col-sm="9">
+                        <!-- Nombre, puntuacion-->
+                        <b:row>
+                            <b:column col-xs="7" col-lg="7" col-md="6" col-sm="6" >
+                                <p:outputLabel value="Establecimiento: #{controladorLocal.local.nombre} 
+                                               (#{controladorLocal.local.alias})" />
+                            </b:column>
+                            <b:column col-xs="5" col-lg="5" col-md="6" col-sm="6">
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Puntuación: " />
+                                    <p:rating value="3" readonly="true"/>
+                                </h:panelGrid>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <!-- Especialidad -->
+                        <b:row>
+                            <b:column col-xs="12" col-lg="12" col-md="12" col-sm="12" >
+                                <h:outputText value="Especialidad: #{controladorLocal.local.especialidad}"/>
+                            </b:column>
+                        </b:row>
+                        <br/>
+                        <!-- Menu y servicios -->
+                        <b:row>
+                            <!-- Menu -->
+                            <b:column col-xs="7" col-lg="7" col-md="12" col-sm="12" style="margin-bottom: 20pt">
+                                <p:dataTable value="#{controladorLocal.local.menu}" var="_menu">
+                                    <p:column headerText="Categoría">
+                                        <h:outputText value="#{_menu.categoria}"/>
+                                    </p:column>
+                                    <p:column headerText="Precio Min">
+                                        <h:outputText value="#{_menu.precioMin}"/>
+                                    </p:column>
+                                    <p:column headerText="Precio Max">
+                                        <h:outputText value="#{_menu.precioMax}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </b:column>
+                            <!-- Servicios -->
+                            <b:column col-xs="5" col-lg="5" col-md="12" col-sm="12" style="margin-bottom: 20pt">
+                                <p:outputLabel value="Servicios"/>
+                                <p:selectManyCheckbox 
+                                    value="#{controladorLocal.local.servicios}"
+                                    layout="grid" columns="2">
+                                    <!--Modificacion de lineas-->
+                                    <f:selectItems 
+                                        value="#{controladorLocal.servicios}"
+                                        var="_servi"
+                                        itemLabel="#{_servi.nombre}" itemValue="#{_servi}"/>
+                                </p:selectManyCheckbox>
+                            </b:column>
+                        </b:row>
+                        <!-- Descripcion -->
+                        <b:row>
+                            <b:column col-xs="12" col-lg="12" col-md="12" col-sm="12" >
+                                <h:outputText value="Descripción"/>
+                                <p>
+                                    <h:outputText value="#{controladorLocal.local.descripción}"/>
+                                </p>
+                            </b:column>
+                        </b:row>
+                        <!-- Comentarios -->
+                        <b:row>
+                            <b:column col-xs="12" col-lg="12" col-md="12" col-sm="12">
+                                <h:form> 
+                                    <p:dataScroller value="#{controladorLocal.locales}" var="_loc" chunkSize="1">
+                                        <f:facet name="header">
+                                            COMENTARIOS
+                                        </f:facet>
+                                        <h:panelGrid columns="3">
+                                            <p:column>
+                                                <h:panelGrid columns="1" style="font-size: 30pt">
+                                                    #{controladorLocal.posicion}
+                                                </h:panelGrid>
+                                            </p:column>
+                                            <p:column>
+                                                <h:panelGrid>
+                                                    <h:graphicImage height="50" name="facebook.jpg" /> 
+                                                </h:panelGrid>
+                                            </p:column>
+                                            <p:column>
+                                                <p:row>
+                                                    <h:panelGrid columns="5">
+                                                        <p:column>
+                                                            <h:commandLink value=":#{_loc.nombre}" action="verLocal.xhtml" actionListener="#{controladorLocal.verLocal(_loc.nombre)}"/>
+                                                        </p:column>
+                                                        <p:column/><p:column/><p:column/>
+                                                        <p:column>
+                                                            <p:rating value="#{_loc.calificacion}" readonly="true" />
+                                                        </p:column>
+                                                    </h:panelGrid>
+                                                </p:row>
+                                                <p:row>
+                                                    <h:panelGrid columns="1">
+                                                        <p>#{_loc.descripción}</p>
+                                                    </h:panelGrid>
+                                                </p:row>
+                                            </p:column>
+                                        </h:panelGrid>
+                                    </p:dataScroller>
+                                </h:form>
+                            </b:column>
+                        </b:row>
+                        <!-- Agregar Comentario -->
+                        <b:row>
+                            <b:column col-xs="12" col-lg="12" col-md="12" col-sm="12">
+                                <b:row>
+                                    <b:column col-xs="6" col-lg="6" col-md="6" col-sm="6">
+                                        <h:outputText value="Comentario"/>
+                                    </b:column>
+                                    <b:column col-xs="6" col-lg="6" col-md="6" col-sm="6">
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <h:outputText value="Puntuación: " />
+                                            <p:rating value="3" readonly="true"/>
+                                        </h:panelGrid>
+                                    </b:column>
+                                </b:row>
+                                <h:form>           
+                                    <p:editor id="editor" widgetVar="editorWidget" value="#{editorView.text}" maxlength="140" height="150"/>
+
+                                    <h:panelGrid columns="2" style="margin-top: 5px">
+                                        <p:commandButton value="Submit" update="display" oncomplete="PF('dlg').show()" icon="ui-icon-disk" />
+
+                                        <p:commandButton value="Clear" type="button" onclick="PF('editorWidget').clear();" icon="ui-icon-close" />
+                                    </h:panelGrid>
+
+                                    <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+                                        <h:outputText id="display" value="#{editorView.text}" escape="false" />
+                                    </p:dialog>
+                                </h:form> 
+                            </b:column>
+                        </b:row>
+                    </b:column>
+                </b:row>
+            </b:container>
+        </ui:define>
+    </ui:composition>
+</html>

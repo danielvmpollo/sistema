@@ -125,13 +125,13 @@ public class ServicioLocalImplementacion implements ServicioLocal{
     }
 
     /**
-     * Método que busca un local mediante su nombre.
-     * @param nombre El nombre del local.
+     * Método que busca un local mediante su id.
+     * @param id El nombre del local.
      * @return Un local.
      */
     @Override
-    public Local buscarLocal(String nombre) {
-        return repositorioLocal.buscarLocal(nombre);
+    public Local buscarLocal(int id) {
+        return repositorioLocal.buscarLocal(id);
     }
     
 }

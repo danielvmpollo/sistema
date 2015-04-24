@@ -45,12 +45,6 @@ public class Transporte implements Serializable {
      */
     @NotNull
     private String estacion;
-    
-    /**
-     * Variable que almacena la referencia al local del que proviene.
-     */
-    @ManyToOne(cascade = CascadeType.ALL,fetch =FetchType.EAGER)
-    private Local local;
 
     /**
      * Método que regresa el id del tranporte.
@@ -98,22 +92,6 @@ public class Transporte implements Serializable {
      */
     public void setEstacion(String estacion) {
         this.estacion = estacion;
-    }
-
-    /**
-     * Método que regresa el local del que proviene.
-     * @return Un local.
-     */
-    public Local getLocal() {
-        return local;
-    }
-
-    /**
-     * Método que asigna un nuevo local.
-     * @param local El nuevo local.
-     */
-    public void setLocal(Local local) {
-        this.local = local;
     }
     
     @Override

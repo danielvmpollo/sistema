@@ -31,14 +31,6 @@
                                         FROM Usuario 
                                         WHERE usuario = ? "/>
         </security:authentication-provider>
-    </security:authentication-manager>     
-    
-    <!--security:authentication-manager>
-        <security:authentication-provider>
-            <security:user-service>
-                <security:user name="ADMIN" password="ADMIN" authorities="ROLE_ADMIN" />
-            </security:user-service>
-        </security:authentication-provider>
-    </security:authentication-manager-->    
+    </security:authentication-manager>
         
 </beans>

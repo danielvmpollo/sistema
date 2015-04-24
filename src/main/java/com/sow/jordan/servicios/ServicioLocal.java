@@ -73,17 +73,24 @@ public interface ServicioLocal {
     void eliminarLocal(Local local);
     
     /**
-     * Método que busca un lugar mediante su id.
-     * @param id El id del lugar.
-     * @return Una lista con la información
-     */
-    Lugar buscarLugar(int id);
-
-    /**
      * Método que busca un local mediante su id.
      * @param id El id del local.
      * @return Un local.
      */
     Local buscarLocal(int id);
+    
+    /**
+     * Método que busca un lugar mediante su id.
+     * @param id El id del lugar.
+     * @return Una lista con la información
+     */
+    Lugar buscarLugar(int id);
+    
+    /**
+     * Método que busca un transporte mediante su id.
+     * @param id El id del transporte.
+     * @return Un transporte.
+     */
+    Transporte buscarTransporte(int id);
     
 }

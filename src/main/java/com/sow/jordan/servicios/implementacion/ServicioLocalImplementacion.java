@@ -115,6 +115,17 @@ public class ServicioLocalImplementacion implements ServicioLocal{
     }
     
     /**
+     * Método que busca un local mediante su id.
+     *
+     * @param id El nombre del local.
+     * @return Un local.
+     */
+    @Override
+    public Local buscarLocal(int id) {
+        return repositorioLocal.buscarLocal(id);
+    }
+    
+    /**
      * Método que busca un lugar mediante su id.
      * @param id El id del lugar.
      * @return Una lista con la información
@@ -123,15 +134,15 @@ public class ServicioLocalImplementacion implements ServicioLocal{
     public Lugar buscarLugar(int id) {
         return repositorioLugar.buscarLugar(id);
     }
-
+    
     /**
-     * Método que busca un local mediante su id.
-     * @param id El nombre del local.
-     * @return Un local.
+     * Método que busca un transporte mediante su id.
+     * @param id El id del transporte.
+     * @return Un transporte.
      */
     @Override
-    public Local buscarLocal(int id) {
-        return repositorioLocal.buscarLocal(id);
+    public Transporte buscarTransporte(int id){
+        return repositorioTransporte.buscarTransporte(id);
     }
     
 }

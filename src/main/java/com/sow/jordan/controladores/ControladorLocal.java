@@ -42,6 +42,15 @@ public class ControladorLocal  implements Serializable {
     //private Map<String,Lugar> lugares2;
     private int posicion;
     private int id;
+    private int idt;
+
+    public int getIdt() {
+        return idt;
+    }
+
+    public void setIdt(int idt) {
+        this.idt = idt;
+    }
 
     /**
      * Método que se ejecuta después de realizar la inyección de dependencias.
@@ -102,6 +111,9 @@ public class ControladorLocal  implements Serializable {
      * Método que agrega un transporte a un local.
      */
     public void guardarTransporte() {
+        //lugar = servicioLocal.buscarLugar(id);
+        //local.setLugar(lugar);
+        transporte = servicioLocal.buscarTransporte(idt);
         local.getTransportes().add(transporte);
         transporte = new Transporte();
     }
@@ -146,6 +158,10 @@ public class ControladorLocal  implements Serializable {
      */
     public void verLocal(int id) {
         this.local = servicioLocal.buscarLocal(id);
+    }
+    
+    public List<Transporte> getTipo() {
+        return transportes;
     }
     
     /**
@@ -332,6 +348,13 @@ public class ControladorLocal  implements Serializable {
      */
     public void setId(int id) {
         this.id = id;
+    }
+    
+    /**
+     * Método que elimina el resgistro.
+     */
+    public void limpiar(){
+        local = new Local();
     }
     
     /**

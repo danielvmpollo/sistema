@@ -35,17 +35,11 @@
                             <p:button icon="ui-icon-search" title="Buscar" style="margin: 5pt; margin-left: 0pt"/>
                         </p:menuitem>
                         <p:menuitem>
-                            <p:commandButton 
-                                icon="ui-icon-key" 
-                                value="Iniciar Sesión" 
-                                title="Iniciar Sesión" 
-                                onclick="PF('logeo').show();"
-                                style="margin: 5pt"/>
+                            <p:commandButton icon="ui-icon-key" onclick="PF('logeo').show();"
+                                style="margin: 5pt" title="Iniciar Sesión" value="Iniciar Sesión"/>
                         </p:menuitem>
                     </p:menubar>
                 </h:form>
-                
-                
                 
                 <h:form id="busquedaAbanzada">
                     <p:accordionPanel activeIndex="-1" style="font-size: 15pt">
@@ -67,14 +61,12 @@
                     </p:accordionPanel>
                 </h:form>
                 
-                
-                
                 <form id="iniciarSesion" action="#{facesContext.externalContext.requestContextPath}/j_spring_security_check" method="POST">
                     <p:dialog header="INICIAR SESIÓN" widgetVar="logeo" modal="true" 
                               closable="true"> <br/>
                         <div align="center">
-                            <input type="text" name="j_username" /><br/><br/><br/>
-                            <input type="password" name="j_password"/><br/><br/><br/>
+                            <input type="text" name="j_username" placeholder="Usuario"/><br/><br/><br/>
+                            <input type="password" name="j_password" placeholder="Contraseña"/><br/><br/><br/>
                             <input name="submit" type="submit" value="Entrar"/><br/><br/>
                             <!--p:inputText placeholder="Usuario" id="j_username"/><br/><br/><br/>
                             <p:password placeholder="Contraseña" id="j_password"/><br/><br/><br/>

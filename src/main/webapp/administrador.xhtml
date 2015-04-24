@@ -113,8 +113,9 @@ Pagina que contiene las funciones del administrador.
                                          value="#{controladorLocal.transporte.estacion}" />
                             <p:inputText id="tipo" placeholder="Tipo"
                                          value="#{controladorLocal.transporte.tipo}" />
-                            <p:commandButton actionListener="#{controladorLocal.guardarTransporte()}"
+                            <p:commandButton 
                                              value="Agregar Transporte" update=":agregar @form"  />
+                            <!--actionListener="{controladorLocal.guardarTransporte()}"-->
                         </h:panelGrid>
 
                         <h:panelGrid style="width: 340px">
@@ -137,19 +138,34 @@ Pagina que contiene las funciones del administrador.
                         </h:panelGrid>
 
                         <h:panelGrid>
-                            <h:panelGrid style="width:200px" >
-                                <p:dataTable value="#{controladorLocal.local.transportes}"
+                            <!--h:panelGrid style="width:200px" >
+                                <p:dataTable value="{controladorLocal.local.transportes}"
                                              var="_transporte" scrollable="true" 
                                              scrollHeight="150">
                                     <p:column headerText="Estación" style="width:100px">
-                                        #{_transporte.estacion}
+                                        {_transporte.estacion}
                                     </p:column>
                                     <p:column headerText="Tipo" style="width:100px" >
-                                        #{_transporte.tipo}
+                                        {_transporte.tipo}
                                     </p:column>
                                     <p:column style="width: 80px">
                                         <p:commandButton value="Borrar" update=":agregar @form"
-                                                         actionListener="#{controladorLocal.eliminarTransporte(_transporte)}"/>
+                                                         actionListener="{controladorLocal.eliminarTransporte(_transporte)}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:panelGrid-->
+                            
+                            <h:panelGrid columns="1"  width="300">
+                                <p:dataTable value="#{controladorLocal.transportes}"
+                                             var="_transporte" rowKey="#{_transporte.id}"
+                                             selection="#{controladorLocal.local.transportes}"
+                                             >                       
+                                    <p:column selectionMode="multiple" style="width:16px;text-align:center" />
+                                    <p:column headerText="Tipo" >
+                                        #{_transporte.tipo}
+                                    </p:column>
+                                    <p:column headerText="Estación" >
+                                        #{_transporte.estacion}
                                     </p:column>
                                 </p:dataTable>
                             </h:panelGrid>

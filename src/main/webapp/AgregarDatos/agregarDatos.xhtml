@@ -23,6 +23,17 @@ Pagina para agregar datos.
             </h:form>
             <h:form>
                 <p:panelGrid columns="2" >
+                    <p:inputText id="transporte" placeholder="Tipo de transporte" required="true"
+                                 value="#{controladorLocal.transporte.tipo}" />
+                    <p:inputText id="estacion" placeholder="Estación" required="true"
+                                 value="#{controladorLocal.transporte.estacion}" />
+                    <p:commandButton ajax="false" 
+                                     actionListener="#{controladorLocal.agregarTransporte()}" 
+                                     value="Agregar Lugar" update=":transportes @form"/>
+                </p:panelGrid>
+            </h:form>
+            <h:form>
+                <p:panelGrid columns="2" >
                     <p:inputText id="lugar" placeholder="Nombre del servicio" required="true"
                                  value="#{controladorLocal.servicio.nombre}" />
                     <p:fileUpload allowTypes="/(\.|\/)(gif|jpe?g|png)$/" auto="false" 
@@ -40,6 +51,10 @@ Pagina para agregar datos.
             <h:form>
                 <p:dataTable value="#{controladorLocal.lugares}" var="_lugar">
                     <p:column headerText="Lugar">#{_lugar.nombre}</p:column>
+                </p:dataTable> 
+                <p:dataTable value="#{controladorLocal.transportes}" var="_transporte">
+                    <p:column headerText="Lugar">#{_transporte.tipo}</p:column>
+                    <p:column headerText="Lugar">#{_transporte.estacion}</p:column>
                 </p:dataTable> 
                 <p:dataTable value="#{controladorLocal.servicios}" var="_servicio">
                     <p:column headerText="Lugar">#{_servicio.nombre}</p:column>

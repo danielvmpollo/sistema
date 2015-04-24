@@ -53,7 +53,6 @@ public class ControladorLocal  implements Serializable {
         transportes = servicioLocal.cargarTransportes();
         locales = servicioLocal.cargarLocales();
         local.setMenu(new ArrayList<Menu>());
-        local.setTransportes(new ArrayList<Transporte>());
         /*lugares2 = new HashMap<String,Lugar>();
         for(Lugar l : lugares)
             lugares2.put(l.getNombre(), l);

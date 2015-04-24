@@ -71,6 +71,7 @@ public class ControladorLocal  implements Serializable {
         transportes = servicioLocal.cargarTransportes();
         locales = servicioLocal.cargarLocales();
         local.setMenu(new ArrayList<Menu>());
+        local.setTransportes(new ArrayList<Transporte>());
         /*lugares2 = new HashMap<String,Lugar>();
         for(Lugar l : lugares)
             lugares2.put(l.getNombre(), l);
@@ -161,10 +162,11 @@ public class ControladorLocal  implements Serializable {
     
     /**
      * Método que busca un local en la base de datos para mostrar su información
-     * @param id El id del local.
+     * @param idLocal El id del local.
      */
-    public void verLocal(int id) {
-        this.local = servicioLocal.buscarLocal(id);
+    public void verLocal(int idLocal) {
+        this.id = idLocal;
+        this.local = servicioLocal.buscarLocal(idLocal);
     }
     
     public List<String> getTipos() {

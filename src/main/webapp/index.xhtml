@@ -12,6 +12,7 @@ Pagina principal del sistema Jordan.
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:composition template="/Plantillas/user.xhtml">
         <ui:define name="content">
+            
             <h:form>
                 <h3>Top 5</h3>
                 <p:accordionPanel activeIndex="0,1,2,3,4" multiple="true" 
@@ -28,9 +29,8 @@ Pagina principal del sistema Jordan.
                                 </h:panelGrid>
                                 <h:panelGrid columns="1" width="100%" >
                                     <h:panelGrid columns="2" width="100%" >
-                                        <a href="local.xhtml" style="font-size: 14pt"
-                                           actionListener="#{controladorLocal.verLocal(_local.id)}">
-                                        #{_local.nombre} (#{_local.alias}) </a>
+                                        <a href="local.xhtml" style="font-size: 14pt">
+                                        #{_local.nombre} (#{_local.alias}) #{_local.id}</a>
                                         <h:panelGrid columns="2" >
                                             <p:outputLabel value="Puntuación:" style="font-size: 15pt"/>
                                             <p:rating value="3" readonly="true"/>
@@ -49,12 +49,13 @@ Pagina principal del sistema Jordan.
                     </p:tab>
                 </p:accordionPanel>
             </h:form>
-            
+
             <!--p:dataTable value="{controladorUsuario.usuarios}" var="_usuario">
                 <p:column>{_usuario.usuario}</p:column>
                 <p:column>{_usuario.contrasena}</p:column>
                 <p:column>{_usuario.privilegio}</p:column>
             </p:dataTable-->
+            
         </ui:define>
     </ui:composition>
 </html>

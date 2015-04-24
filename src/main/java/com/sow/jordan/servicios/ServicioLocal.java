@@ -93,4 +93,17 @@ public interface ServicioLocal {
      */
     Transporte buscarTransporte(int id);
     
+    /**
+     * Método que regres una lista de los tipos de transporte.
+     * @return Una lista con la información.
+     */
+    List<String> tipos();
+    
+    /**
+     * Método que regresa los transportes de acuerdo al tipo seleccionado.
+     * @param tipo El tipo de transporte
+     * @return Una lista con la información.
+     */
+    List<Transporte> porTipos(String tipo);
+    
 }

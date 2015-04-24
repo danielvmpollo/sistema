@@ -107,11 +107,15 @@ Pagina que contiene las funciones del administrador.
                         </h:panelGrid>
 
                         <h:panelGrid columns="2">
-                            <p:selectOneMenu id="transpotorte" value="#{controladorLocal.idt}" style="width:150px">
-                                <!--p:ajax listener="{dropdownView.onCountryChange}" update="city" /-->
+                            <p:selectOneMenu value="#{controladorLocal.tipo}" style="width:150px">
+                                <p:ajax listener="#{controladorLocal.buscarTransporte()}" update="transpotorte" />
                                 <f:selectItem itemLabel="Seleccione un tipo" itemValue="" noSelectionOption="true" />
-                                <f:selectItems value="#{controladorLocal.tipo}" var="_transporte" 
-                                               itemLabel="#{_transporte.tipo}" itemValue="#{_transporte.id}"/>
+                                <f:selectItems value="#{controladorLocal.tipos}"/>
+                            </p:selectOneMenu>
+                            <p:selectOneMenu id="transpotorte" value="#{controladorLocal.idTransporte}" style="width:150px">
+                                <f:selectItem itemLabel="Seleccione una estación" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{controladorLocal.transportes}" var="_transporte"  
+                                               itemLabel="#{_transporte.estacion}" itemValue="#{_transporte.id}" />
                             </p:selectOneMenu>
                             <p:commandButton actionListener="#{controladorLocal.guardarTransporte()}"
                                              value="Agregar Transporte" update=":agregar @form"  />
@@ -137,37 +141,22 @@ Pagina que contiene las funciones del administrador.
                         </h:panelGrid>
 
                         <h:panelGrid>
-                            <h:panelGrid style="width:200px" >
-                                <p:dataTable value="#{controladorLocal.local.transportes}"
-                                             var="_transporte" scrollable="true" 
-                                             scrollHeight="150">
-                                    <p:column headerText="Estación" style="width:100px">
-                                        #{_transporte.estacion}
-                                    </p:column>
-                                    <p:column headerText="Tipo" style="width:100px" >
+
+                            <h:panelGrid style="width: 340px">
+                                <p:dataTable value="#{controladorLocal.local.transportes}" 
+                                             var="_transporte" scrollable="true" scrollHeight="150"> 
+                                    <p:column headerText="Tipo" style="width:100px">
                                         #{_transporte.tipo}
+                                    </p:column>
+                                    <p:column headerText="Estación" style="width:80px">
+                                        #{_transporte.estacion}
                                     </p:column>
                                     <p:column style="width: 80px">
                                         <p:commandButton value="Borrar" update=":agregar @form"
                                                          actionListener="#{controladorLocal.eliminarTransporte(_transporte)}"/>
                                     </p:column>
-                                </p:dataTable>
+                                </p:dataTable>﻿
                             </h:panelGrid>
-
-                            <!--h:panelGrid columns="1"  width="300">
-                                <p:dataTable value="{controladorLocal.transportes}"
-                                             var="_transporte" rowKey="{_transporte.id}"
-                                             selection="{controladorLocal.local.transportes}"
-                                             >                       
-                                    <p:column selectionMode="multiple" style="width:16px;text-align:center" />
-                                    <p:column headerText="Tipo" >
-                                        {_transporte.tipo}
-                                    </p:column>
-                                    <p:column headerText="Estación" >
-                                        {_transporte.estacion}
-                                    </p:column>
-                                </p:dataTable>
-                            </h:panelGrid-->
 
                         </h:panelGrid>
                     </h:panelGrid>

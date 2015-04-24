@@ -32,4 +32,19 @@ public interface RepositorioTransporte extends CrudRepository<Transporte, Intege
     @Query("SELECT transporte FROM Transporte transporte WHERE transporte.id = ?")
     Transporte buscarTransporte(Integer id);
     
+    /**
+     * Método que regresa una lista con los tipos de transporte
+     * @return 
+     */
+    @Query("SELECT transporte.tipo FROM Transporte transporte GROUP BY transporte.tipo")
+    List<String> tipos();
+    
+    /**
+     * Método que busca los transportes de acuerdo al tipo seleccionado
+     * @param tipo El tipo de transporte
+     * @return Una lista con la información.
+     */
+    @Query("SELECT transporte FROM Transporte transporte WHERE transporte.tipo = ?")
+    List<Transporte> porTipos(String tipo);
+    
 }

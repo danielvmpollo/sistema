@@ -144,5 +144,24 @@ public class ServicioLocalImplementacion implements ServicioLocal{
     public Transporte buscarTransporte(int id){
         return repositorioTransporte.buscarTransporte(id);
     }
+
+    /**
+     * Método que regres una lista de los tipos de transporte.
+     * @return Una lista con la información.
+     */
+    @Override
+    public List<String> tipos() {
+        return repositorioTransporte.tipos();
+    }
+
+    /**
+     * Método que regresa los transportes de acuerdo al tipo seleccionado.
+     * @param tipo El tipo de transporte
+     * @return Una lista con la información.
+     */
+    @Override
+    public List<Transporte> porTipos(String tipo) {
+        return repositorioTransporte.porTipos(tipo);
+    }
     
 }

@@ -42,14 +42,23 @@ public class ControladorLocal  implements Serializable {
     //private Map<String,Lugar> lugares2;
     private int posicion;
     private int id;
-    private int idt;
+    private int idTransporte;
+    private String tipo;
 
-    public int getIdt() {
-        return idt;
+    public int getIdTransporte() {
+        return idTransporte;
     }
 
-    public void setIdt(int idt) {
-        this.idt = idt;
+    public void setIdTransporte(int idTransporte) {
+        this.idTransporte = idTransporte;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     /**
@@ -111,9 +120,7 @@ public class ControladorLocal  implements Serializable {
      * Método que agrega un transporte a un local.
      */
     public void guardarTransporte() {
-        //lugar = servicioLocal.buscarLugar(id);
-        //local.setLugar(lugar);
-        transporte = servicioLocal.buscarTransporte(idt);
+        transporte = servicioLocal.buscarTransporte(idTransporte);
         local.getTransportes().add(transporte);
         transporte = new Transporte();
     }
@@ -160,8 +167,12 @@ public class ControladorLocal  implements Serializable {
         this.local = servicioLocal.buscarLocal(id);
     }
     
-    public List<Transporte> getTipo() {
-        return transportes;
+    public List<String> getTipos() {
+        return servicioLocal.tipos();
+    }
+    
+    public void buscarTransporte(){
+        transportes = servicioLocal.porTipos(this.tipo);
     }
     
     /**

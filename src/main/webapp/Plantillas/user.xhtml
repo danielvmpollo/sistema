@@ -69,20 +69,23 @@
                 
                 
                 
-                <h:form id="iniciarSesion">
+                <form id="iniciarSesion" action="#{facesContext.externalContext.requestContextPath}/j_spring_security_check" method="POST">
                     <p:dialog header="INICIAR SESIÓN" widgetVar="logeo" modal="true" 
                               closable="true"> <br/>
                         <div align="center">
-                            <p:inputText placeholder="Usuario" /><br/><br/><br/>
-                            <p:password placeholder="Contraseña" /><br/><br/><br/>
-                            <p:commandButton value="Entrar" /><br/><br/>
-                            <!--Validar usuario-->
+                            <input type="text" name="j_username" /><br/><br/><br/>
+                            <input type="password" name="j_password"/><br/><br/><br/>
+                            <input name="submit" type="submit" value="Entrar"/><br/><br/>
+                            <!--p:inputText placeholder="Usuario" id="j_username"/><br/><br/><br/>
+                            <p:password placeholder="Contraseña" id="j_password"/><br/><br/><br/>
+                            <p:commandButton value="Entrar"
+                                             actionListener="{controladorUsuario.autentifica}"/><br/><br/-->
                             <p:commandLink value="Recuperar Contraseña" style="color: cornflowerblue"
-                                           onclick="PF('recuperar').show();PF('logeo').hide();"/><br/>
+                                           onclick="PF('recuperar').show();PF('logeo').hide();"/><br/><br/>
                             <p:commandLink value="Registrarse" style="color: cornflowerblue" onclick="PF('registro').show();PF('logeo').hide();"/>
                         </div>
                     </p:dialog>
-                </h:form>
+                </form>
                 
                 <script>
                     var error = window.location.search;

@@ -36,4 +36,8 @@ public class ServicioUsuarioImplementacion implements ServicioUsuario {
         repositorioUsuario.delete(usuario);
     }
     
+     @Override
+    public List<Usuario> buscarPassword(String correo) {
+        return repositorioUsuario.buscarPassword(correo);
+    }
 }

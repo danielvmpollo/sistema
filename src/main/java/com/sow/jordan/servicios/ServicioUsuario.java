@@ -18,6 +18,8 @@ public interface ServicioUsuario {
     public void guardarUsuario(Usuario usuario);
     public void eliminarUsuario(Usuario usuario);
     
+    public List<Usuario> buscarPassword(String correo);
+    
     List<Usuario> cargarUsuarios();
     
 }

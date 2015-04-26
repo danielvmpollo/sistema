@@ -4,7 +4,14 @@
 package com.sow.jordan.modelos;
 
 import java.io.Serializable;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -42,6 +49,8 @@ public class Usuario implements Serializable {
             mappedBy = "usuario",
             orphanRemoval = true)
     private  List<Comentario> comentarios;
+    
+    private byte[] contra;
 
     public String getUsuario() {
         return usuario;
@@ -56,7 +65,19 @@ public class Usuario implements Serializable {
     }
 
     public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+        String llaveSimetrica = "holamundocruel12";
+        SecretKeySpec key = new SecretKeySpec(llaveSimetrica.getBytes(), "AES");
+        Cipher cipher;
+        try {
+            cipher = Cipher.getInstance("AES");
+
+            //Comienzo a encriptar
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            byte[] campoCifrado = cipher.doFinal(contrasena.getBytes());
+            this.contra=campoCifrado;
+            this.contrasena = new String (campoCifrado);
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
+        }
     }
 
     public String getNombre() {
@@ -77,6 +98,14 @@ public class Usuario implements Serializable {
 
     public String getPrivilegio() {
         return privilegio;
+    }
+
+    public byte[] getContra() {
+        return contra;
+    }
+
+    public void setContra(byte[] contra) {
+        this.contra = contra;
     }
 
     public void setPrivilegio(String privilegio) {
